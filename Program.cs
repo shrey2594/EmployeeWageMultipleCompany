@@ -27,37 +27,14 @@ namespace EmployeeWageMultipleCompany
             }
         }
 
-        public static void CalculateDailyWage()
-        {
-            int wagePerHour = 20;
-            int fullDayHour = 8;
-            int moneyEarned;
-            if (checkPresentAbsent() == true)
-            {
-                moneyEarned = wagePerHour * fullDayHour;
-                Console.WriteLine("The employee earned " + moneyEarned + " throughout the day.");
-            }
-            else
-            {
-                Console.WriteLine("The employee is Absent, hence earned nothing.");
-            }
-        }
         //public static void CalculateDailyWage()
         //{
         //    int wagePerHour = 20;
         //    int fullDayHour = 8;
-        //    int partTimeHour = 4;
         //    int moneyEarned;
         //    if (checkPresentAbsent() == true)
         //    {
-        //        if (PartTime() == true)
-        //        {
-        //            moneyEarned = wagePerHour * partTimeHour;
-        //        }
-        //        else
-        //        {
-        //            moneyEarned = wagePerHour * fullDayHour;
-        //        }
+        //        moneyEarned = wagePerHour * fullDayHour;
         //        Console.WriteLine("The employee earned " + moneyEarned + " throughout the day.");
         //    }
         //    else
@@ -65,20 +42,43 @@ namespace EmployeeWageMultipleCompany
         //        Console.WriteLine("The employee is Absent, hence earned nothing.");
         //    }
         //}
+        public static void CalculateDailyWage()
+        {
+            int wagePerHour = 20;
+            int fullDayHour = 8;
+            int partTimeHour = 4;
+            int moneyEarned;
+            if (checkPresentAbsent() == true)
+            {
+                if (PartTime() == true)
+                {
+                    moneyEarned = wagePerHour * partTimeHour;
+                }
+                else
+                {
+                    moneyEarned = wagePerHour * fullDayHour;
+                }
+                Console.WriteLine("The employee earned " + moneyEarned + " throughout the day.");
+            }
+            else
+            {
+                Console.WriteLine("The employee is Absent, hence earned nothing.");
+            }
+        }
 
-        //public static bool PartTime()
-        //{
-        //    int isPartTime = 1;
-        //    Random random = new Random();
-        //    int check = random.Next(0, 2);
-        //    if (check == isPartTime)
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
+        public static bool PartTime()
+        {
+            int isPartTime = 1;
+            Random random = new Random();
+            int check = random.Next(0, 2);
+            if (check == isPartTime)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
