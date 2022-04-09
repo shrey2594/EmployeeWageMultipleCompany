@@ -32,13 +32,37 @@ namespace EmployeeWageMultipleCompany
             }
         }
 
-        public static int CalculateDailyWage(int wagePerHour,int partTimeHour,int fullDayHour)
+        public static void CalculateDailyWage(int wagePerHour,int partTimeHour,int fullTimeHour,int workDayPerMonth,int wageCondition)
         {
-            int final = Convert.ToInt32(checkPresentAbsent());
-            if (final != 0)
-            { final += Convert.ToInt32(PartTime()); }
-            int result=switchCase(final, wagePerHour, fullDayHour, partTimeHour);
-            return result;
+            int totalAmount = 0;
+            int totalHours = 0;
+            for (int i = 0; i < workDayPerMonth; i++)
+            {
+                int final = Convert.ToInt32(checkPresentAbsent());
+                if (final != 0)
+                { 
+                    final += Convert.ToInt32(PartTime()); 
+                    if(final==1)
+                    {
+                        totalHours += partTimeHour;
+                    }
+                    else
+                    {
+                        totalHours += fullTimeHour;
+                    }
+                }
+
+
+                if(totalHours<=wageCondition)
+                {
+                    totalAmount += switchCase(final, wagePerHour, fullTimeHour, partTimeHour);
+                }
+                else
+                {
+                    break;
+                }
+            }
+            Console.WriteLine("\n\nThe employee earned " + totalAmount + " throughout the month.");
         }
 
         public static bool PartTime()
@@ -76,17 +100,14 @@ namespace EmployeeWageMultipleCompany
             int wagePerHour = 20;
             int fullDayHour = 8;
             int partTimeHour = 4;
-            int workDayPerMonth = 22;
-            //int final = Convert.ToInt32(checkPresentAbsent());
-            //if (final != 0)
-            //{ final += Convert.ToInt32(PartTime()); }
-            int Total_Amount = 0;
-            for (int i = 0; i < workDayPerMonth; i++)
-            {
-                Total_Amount+=CalculateDailyWage(wagePerHour,partTimeHour,fullDayHour);
-            }
-
-            Console.WriteLine("\n\nThe employee earned " + Total_Amount + " throughout the month.");
+            int workDayPerMonth = 20;
+            int wageCondition = 100;
+            //for (int i = 0; i < workDayPerMonth; i++)
+            //{
+            //    Total_Amount+=CalculateDailyWage(wagePerHour,partTimeHour,fullDayHour);
+            //}
+            CalculateDailyWage(wagePerHour, partTimeHour, fullDayHour,workDayPerMonth,wageCondition);
+            //Console.WriteLine("\n\nThe employee earned " + Total_Amount + " throughout the month.");
         }
     }
 }
