@@ -9,61 +9,37 @@ namespace EmployeeWageMultipleCompany
             Console.WriteLine("Welcome to Employee Wage Computation Program.");
             CalculateDailyWage();
         }
-
-        public static bool checkPresentAbsent()
+        public static void switchCase(int number, int wagePerHour, int fullDayHour, int partTimeHour)
         {
-            int isPresent = 1;
-            Random random = new Random();
-            int check = random.Next(0, 2);
-            if (check == isPresent)
+            int moneyEarned;
+            switch (number)
             {
-                Console.WriteLine("Employee is present.");
-                return true;
-            }
-            else
-            {
-                Console.WriteLine("Employee is absent.");
-                return false;
+                case 0:
+                    Console.WriteLine("The employee is Absent, hence earned nothing.");
+                    break;
+                case 1:
+                    moneyEarned = wagePerHour * partTimeHour;
+                    Console.WriteLine("The employee earned " + moneyEarned + " throughout the day.");
+                    break;
+                case 2:
+                    moneyEarned = wagePerHour * fullDayHour;
+                    Console.WriteLine("The employee earned " + moneyEarned + " throughout the day.");
+                    break;
+                default:
+                    Console.WriteLine("Out of context.");
+                    break;
             }
         }
 
-        //public static void CalculateDailyWage()
-        //{
-        //    int wagePerHour = 20;
-        //    int fullDayHour = 8;
-        //    int moneyEarned;
-        //    if (checkPresentAbsent() == true)
-        //    {
-        //        moneyEarned = wagePerHour * fullDayHour;
-        //        Console.WriteLine("The employee earned " + moneyEarned + " throughout the day.");
-        //    }
-        //    else
-        //    {
-        //        Console.WriteLine("The employee is Absent, hence earned nothing.");
-        //    }
-        //}
         public static void CalculateDailyWage()
         {
             int wagePerHour = 20;
             int fullDayHour = 8;
             int partTimeHour = 4;
-            int moneyEarned;
-            if (checkPresentAbsent() == true)
-            {
-                if (PartTime() == true)
-                {
-                    moneyEarned = wagePerHour * partTimeHour;
-                }
-                else
-                {
-                    moneyEarned = wagePerHour * fullDayHour;
-                }
-                Console.WriteLine("The employee earned " + moneyEarned + " throughout the day.");
-            }
-            else
-            {
-                Console.WriteLine("The employee is Absent, hence earned nothing.");
-            }
+            int final = Convert.ToInt32(checkPresentAbsent());
+            if (final != 0)
+            { final += Convert.ToInt32(PartTime()); }
+            switchCase(final, wagePerHour, fullDayHour, partTimeHour);
         }
 
         public static bool PartTime()
@@ -72,6 +48,21 @@ namespace EmployeeWageMultipleCompany
             Random random = new Random();
             int check = random.Next(0, 2);
             if (check == isPartTime)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool checkPresentAbsent()
+        {
+            int isPresent = 1;
+            Random random = new Random();
+            int check = random.Next(0, 2);
+            if (check == isPresent)
             {
                 return true;
             }
